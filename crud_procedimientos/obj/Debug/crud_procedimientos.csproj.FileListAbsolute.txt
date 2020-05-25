@@ -1,0 +1,16 @@
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.Properties.Resources.resources
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.csproj.GenerateResource.cache
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.csproj.CoreCompileInputs.cache
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.FProductosModificar.resources
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\crud_procedimientos.exe.config
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\crud_procedimientos.exe
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\crud_procedimientos.pdb
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.exe
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.pdb
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.FPrincipal.resources
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.csprojAssemblyReference.cache
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\itextsharp.dll
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\itextsharp.pdfa.dll
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\itextsharp.xtra.dll
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\bin\Debug\itextsharp.xml
+C:\Users\Javier\source\repos\crud_procedimientos\crud_procedimientos\crud_procedimientos\obj\Debug\crud_procedimientos.csproj.CopyComplete
