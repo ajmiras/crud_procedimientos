@@ -3,7 +3,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -13,17 +12,17 @@ namespace crud_procedimientos
 {
     class CProductosPDF
     {
-        private const float milimetro = 2.83465f;
+        private const float milimetro = 2.83465f; // 1 milímetro son 2.83465 puntos de pantalla.
 
         public void Imprimir()
         { 
             Document document = new Document();    // Documento PDF.
 
-            document.SetPageSize(iTextSharp.text.PageSize.A4); // Tamaño de la hoja A$
-            document.SetMargins(10f * milimetro,               // Margen derecho 10 mm.
-                                10f * milimetro,               // Margen izquierdo 10 mm. 
-                                30f * milimetro,               // Margen superior 30 mm. 
-                                10f * milimetro);              // Margen inferior 10 mm.
+            document.SetPageSize(iTextSharp.text.PageSize.A4); // Tamaño de la hoja A4.
+            document.SetMargins(10f * milimetro,               // Margen derecho 10 mm ó 1 cm.
+                                10f * milimetro,               // Margen izquierdo 10 mm ó 1 cm. 
+                                30f * milimetro,               // Margen superior 30 mm ó 3 cm. 
+                                10f * milimetro);              // Margen inferior 10 mm ó cm.
 
             try
             {
@@ -32,12 +31,10 @@ namespace crud_procedimientos
 
                 pdfWriter.PageEvent = new HeaderFooter();  // Indicamos nuestro pie de página personalizado.
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                // En caso de nos poder guardar en "test.pdf" mensaje de error y adiós.
-                MessageBox.Show("Al intentar abrir \"test.pdf\"." + ex.Message, "PDF", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-
-                return;
+                // En caso de nos poder guardar en "test.pdf" lanzamos excepción.
+                throw new Exception("Al guardar el fichero \"test.pdf\".\n\n" + ex.Message);
             }
 
             document.Open(); // Abrimos el documentos.
@@ -55,12 +52,11 @@ namespace crud_procedimientos
                 tProductos.WidthPercentage = 100f; // La tabla tendrá una anchura del 100%
 
                 celdaDerecha.HorizontalAlignment = Element.ALIGN_RIGHT; // La celda derecha pues eso a la derecha.
-                celdaDerecha.FixedHeight = 7 * milimetro;
+                celdaDerecha.FixedHeight = 7f * milimetro;
 
                 celdaCabecera.HorizontalAlignment = Element.ALIGN_CENTER;       // Las celdas de la cabecera se alinean al centro,
                 celdaCabecera.BackgroundColor = new BaseColor(Color.LightGray); // con el fondo en gris claro
-                celdaCabecera.FixedHeight = 7 * milimetro;                      // y una altura de celda de 7 mm.
-
+                celdaCabecera.FixedHeight = 7f * milimetro;                      // y una altura de celda de 7 mm.
 
                 celdaCabecera.Phrase = new Phrase("Código");   // Título de la celda código.
                 tProductos.AddCell(celdaCabecera);             // Añadimos la celda.
@@ -77,10 +73,10 @@ namespace crud_procedimientos
                 celdaCabecera.Phrase = new Phrase("Precio");
                 tProductos.AddCell(celdaCabecera);
 
-                tProductos.HeaderRows = 1; // La primera fila, la cabecear, se repetirá en cada nueva página.
+                tProductos.HeaderRows = 1; // La primera fila, la cabecera, se repetirá en cada nueva página.
 
                 // Para cada una de las filas de nuestra consulta...
-                for (int i = 0; i<rows.Count(); i++)
+                for (int i = 0; i < rows.Count(); i++)
                 {
                     celdaDerecha.Phrase = new Phrase(rows[i]["Código"].ToString());  // Código. 
                     tProductos.AddCell(celdaDerecha);                                // Observar que no lo insertamos directamente porque lo queremos alinear a la derecha. 
@@ -97,15 +93,13 @@ namespace crud_procedimientos
             }
             catch (Exception ex)
             {
-                // En caso de error indicamos que error se ha producido.
-                MessageBox.Show("Al generar el PDF.\n\n" + ex.Message, "PDF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // En caso de error lanzamos la excepción con el error que se ha producido.
+                throw new System.Exception("Al generar el archivo \"test.pdf\".\n\n" + ex.Message);
             }
             finally
             {
                 document.Close(); // y lo cerramos.
             }
-
-            MessageBox.Show("PDF creado correctamente.", "PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 
@@ -134,7 +128,7 @@ namespace crud_procedimientos
             fontPie.Color = fontTitulo.Color;               // Color y
             fontPie.SetStyle(iTextSharp.text.Font.NORMAL);  // estilo.
 
-            celdaTitulo.VerticalAlignment = Element.ALIGN_MIDDLE; // Alineación vertical de la celda.
+            celdaLogo.VerticalAlignment = Element.ALIGN_MIDDLE; // Alineación vertical de la celda.
             celdaLogo.Border = 0;                                 // Sin borde. 
 
             celdaTitulo.VerticalAlignment = Element.ALIGN_BOTTOM;
@@ -153,6 +147,7 @@ namespace crud_procedimientos
             string url = "https://www.igformacion.com/wp-content/uploads/2019/04/logo-igformacion.png"; // Dirección del logo.
 
             celdaLogo.Image = iTextSharp.text.Image.GetInstance(new Uri(url));   // Cargamos la imagen desde la dirección indicada en la celda.
+            
             celdaTitulo.Phrase = new Phrase("Listado de productos", fontTitulo); // Ponemos el título del listado.
 
             tCabecera.AddCell(celdaLogo);   // Añadimos el logo a la tabla cabecera.
@@ -170,6 +165,7 @@ namespace crud_procedimientos
             tPie.DefaultCell.Border = 0;
 
             celdaFecha.Phrase = new Phrase(DateTime.Now.ToString("dd/MM/yyyy"), fontPie); // Fecha de impresión.
+            
             celdaNumPagina.Phrase = new Phrase("Página " + writer.PageNumber, fontPie);   // Número de página.
 
             tPie.AddCell(celdaFecha);

@@ -6,15 +6,11 @@ using System.Linq;
 using System.Security.Policy;
 using System.Windows.Forms;
 
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 
 namespace crud_procedimientos
 {
     public partial class FPrincipal : Form
     {
-        private const float milimetro = 2.83465f;
-
         public FPrincipal()
         {
             InitializeComponent();
@@ -243,7 +239,16 @@ namespace crud_procedimientos
         {
             CProductosPDF cProductosPDF = new CProductosPDF();
 
-            cProductosPDF.Imprimir();
+            try
+            {
+                cProductosPDF.Imprimir();
+
+                MessageBox.Show("Archivo \"test.pdf\" se ha generado correctamente.", "PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "PDF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btBuscar_Click(object sender, EventArgs e)
